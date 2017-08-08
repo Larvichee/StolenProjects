@@ -222,6 +222,8 @@ document.addEventListener("DOMContentLoaded", function() {
 		["exp"].map(function(name) {
 			var resource = resourcesName[name];
 			var exp = parseInt(document.getElementsByName("exp")[0].value);
+			if(isNaN(exp)) exp = 0;
+			else if(exp>MAX_FLEET_EXPERIENCE) exp = 5000;
 			bonus.shield += calcBonus[name](exp);
 		});
 		/*edits end*/
@@ -506,8 +508,11 @@ document.addEventListener("DOMContentLoaded", function() {
 
 		var warfleet = new Fleet(0, "Simulation");
 		
+		/*edit start*/
 		var exp = parseInt(document.getElementsByName("exp")[0].value);
+		if(isNaN(exp)) exp = 0;
  		warfleet.exp = exp;
+		/*edit end*/
 		
 		arr(shiplist.getElementsByTagName("input")).map(function(input) {
 			var val = inputval(input);
