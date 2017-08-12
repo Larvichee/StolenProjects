@@ -350,6 +350,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	shiplist.parentNode.appendChild(shiplist.statBlockCombat);
 
 	var stufflist = document.getElementById("stufflist");
+
 	["ammunition", "u-ammunition", "t-ammunition", "armor", "engine","exp"].map(function(name) {
 		var resource = resourcesName[name];
 		var label = span(txt(name.capitalize()));
@@ -372,6 +373,29 @@ document.addEventListener("DOMContentLoaded", function() {
 		input.research = research;
 		return div(label, input);
 	}).map(appendTo(stufflist));
+
+	var enemystufflist = document.getElementById("enemystufflist");
+	["Enemy Exp"].map(function(name) {
+		var resource = resourcesName[name];
+		var label = span(txt(name.capitalize()));
+		var input = el("input");
+		input.type = "text";
+		input.label = label;
+		input.name = name;
+		if(saveData.bonuses && saveData.bonuses[name]) input.value = saveData.bonuses[name];
+		input.resource = resource;
+		input.showValue = span();
+		return div(label, input, input.showValue);
+	}).map(appendTo(enemystufflist));
+	var calcBonus = {
+		"ammunition": function(v) { return 10 * Math.log(1 + v / 1E7)/Math.log(2); },
+		"u-ammunition": function(v) { return 20 * Math.log(1 + v / 1E7)/Math.log(2); },
+		"t-ammunition": function(v) { return 60 * Math.log(1 + v / 2E7)/Math.log(2); },
+		"armor": function(v) { return v / 2e6; },
+		"engine": function(v) { return v / 5e6; },
+		"exp": function(v) { return v/1000;},
+	};
+	
 	var calcBonus = {
 		"ammunition": function(v) { return 10 * Math.log(1 + v / 1E7)/Math.log(2); },
 		"u-ammunition": function(v) { return 20 * Math.log(1 + v / 1E7)/Math.log(2); },
@@ -536,6 +560,12 @@ document.addEventListener("DOMContentLoaded", function() {
 			var val = inputval(input);
 			if(val > 0) enemy.ships[input.ship.id] = saveData.enemies[input.ship.id] = val;
 		});
+		
+		/*edit start*/
+		var enemyexp = parseInt(document.getElementsByName("Enemy Exp")[0].value);
+		if(isNaN(enemyexp)) enemyexp = 0;
+ 		enemy.exp = enemyexp;
+		/*edit end*/
 
 		arr(stufflist.getElementsByTagName("input")).filter(function(input) {
 			return input.resource && input.label;
