@@ -7,4 +7,4 @@ Heart of Galaxy:
 # My Own Projects
 A few examples of code I have written over time.
 
-<a href="https://larvichee.github.io/StolenProjects/My%20Own%20Projects/">Link</a>
+<a href="https://github.com/Larvichee/StolenProjects/tree/master/My%20Own%20Projects">Link</a>
