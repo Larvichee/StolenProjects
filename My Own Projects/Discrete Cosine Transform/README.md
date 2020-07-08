@@ -1,1 +1,1 @@
-<a href="../demo.py">Link</a>
+<a href="demo.py">Link</a>
