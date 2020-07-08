@@ -7,5 +7,4 @@ Heart of Galaxy:
 # My Own Projects
 A few examples of code I have written over time.
 
-Link:
-<a href="https://larvichee.github.io/StolenProjects/My%20Own%20Projects">Battle Calculator</a>
+<a href="https://larvichee.github.io/StolenProjects/My%20Own%20Projects/">Link</a>
